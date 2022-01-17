@@ -6,9 +6,11 @@ import {
   SetContacts,
   UpdateContact,
   RemoveContact,
+  AddContact,
 } from "context/middle";
 import { Container, Contact } from "components";
 import { IContact } from "types";
+import "./style.css";
 
 function Home() {
   const { state, dispatch } = useContact();
@@ -38,6 +40,12 @@ function Home() {
     fetchData();
   }, [dispatch]);
 
+  const addNewContact = async () => {
+    dispatch(SetLoading(true));
+    dispatch(await AddContact());
+    dispatch(SetLoading(false));
+  };
+
   const handleUpdate = async (values: IContact) => {
     dispatch(SetLoading(true));
     dispatch(await UpdateContact(values));
@@ -52,8 +60,13 @@ function Home() {
 
   return (
     <Container>
-      <div>
-        <h3>{loading ? "Loading..." : "Contacts"}</h3>
+      <div className="home-page">
+        <div className="home-header">
+          <h3>{loading ? "Loading..." : "Contacts"}</h3>
+          <button className="btn btn-normal" onClick={addNewContact}>
+            Add Contact
+          </button>
+        </div>
         {contacts?.map((contact) => {
           return (
             <Contact
@@ -63,6 +76,7 @@ function Home() {
             />
           );
         })}
+        <h3>Status: {loading ? "Loading..." : "Done"}</h3>
       </div>
     </Container>
   );
