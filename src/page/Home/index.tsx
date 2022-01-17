@@ -1,7 +1,14 @@
 import React, { useEffect, useMemo } from "react";
 import { useContact } from "context";
 import { getContacts } from "network";
-import { SetLoading, SetContacts } from "context/middle";
+import {
+  SetLoading,
+  SetContacts,
+  UpdateContact,
+  RemoveContact,
+} from "context/middle";
+import { Container, Contact } from "components";
+import { IContact } from "types";
 
 function Home() {
   const { state, dispatch } = useContact();
@@ -31,13 +38,33 @@ function Home() {
     fetchData();
   }, [dispatch]);
 
+  const handleUpdate = async (values: IContact) => {
+    dispatch(SetLoading(true));
+    dispatch(await UpdateContact(values));
+    dispatch(SetLoading(false));
+  };
+
+  const handleRemove = async (id: string) => {
+    dispatch(SetLoading(true));
+    dispatch(await RemoveContact(id));
+    dispatch(SetLoading(false));
+  };
+
   return (
-    <div>
-      <h3>{loading ? "Loading..." : "Contacts"}</h3>
-      {contacts?.map((contact) => {
-        return <p>{contact.name}</p>;
-      })}
-    </div>
+    <Container>
+      <div>
+        <h3>{loading ? "Loading..." : "Contacts"}</h3>
+        {contacts?.map((contact) => {
+          return (
+            <Contact
+              contact={contact}
+              onRemove={handleRemove}
+              onUpdate={handleUpdate}
+            />
+          );
+        })}
+      </div>
+    </Container>
   );
 }
 

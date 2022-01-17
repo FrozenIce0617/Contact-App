@@ -67,8 +67,8 @@ export async function updateContact(contact: IContact): Promise<IContact> {
  * url: https://61c32f169cfb8f0017a3e9f4.mockapi.io/api/v1/contacts/:id
  * method: DELETE
  */
-export async function removeContact(contact: IContact): Promise<IContact> {
-  const response = await fetch(`${BASE_URL}/${contact.id}`, {
+export async function removeContact(id: string): Promise<IContact> {
+  const response = await fetch(`${BASE_URL}/${id}`, {
     method: "DELETE",
   });
   const jsonResponse = await response.json();

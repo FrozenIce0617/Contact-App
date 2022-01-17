@@ -41,14 +41,12 @@ export const UpdateContact = async (
   }
 };
 
-export const RemoveContact = async (
-  contact: IContact
-): Promise<IRemoveContact> => {
-  const result = await removeContact(contact);
+export const RemoveContact = async (id: string): Promise<IRemoveContact> => {
+  const result = await removeContact(id);
   if (result) {
     return Promise.resolve({
       type: ActionType.REMOVE_CONTACT,
-      payload: contact,
+      payload: result,
     });
   } else {
     return Promise.reject("Failed to remove");

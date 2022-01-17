@@ -21,7 +21,7 @@ test("Create contact from mock api", async () => {
 
 test("Remove contact from mock api", async () => {
   const contact: IContact = await createContact();
-  const removedContact: IContact = await removeContact(contact);
+  const removedContact: IContact = await removeContact(contact.id);
   expect(removedContact).toBeDefined();
 
   expect(removedContact.id).toBeDefined();
