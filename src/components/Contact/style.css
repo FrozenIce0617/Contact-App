@@ -1,0 +1,23 @@
+.contact-item {
+    padding: 10px;
+    display: flex;
+    width: 100%;
+    border: white solid 1px;
+}
+
+.contact-item:hover {
+    background-color: #696969;
+}
+
+.contact-item .avatar-wrapper {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-item .content {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+}

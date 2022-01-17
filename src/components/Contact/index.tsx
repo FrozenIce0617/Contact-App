@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { IContact } from "types";
 import Avatar from "components/Avatar";
 import { getFormattedDate } from "defines";
+import "./style.css";
 
 interface IProps {
   contact: IContact;
