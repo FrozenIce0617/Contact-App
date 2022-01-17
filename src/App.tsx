@@ -1,9 +1,12 @@
-import React from 'react';
+import React from "react";
+import Home from "./page/Home";
+import { ContactProvider } from "context";
 
 function App() {
   return (
-    <div className="App">
-    </div>
+    <ContactProvider>
+      <Home />
+    </ContactProvider>
   );
 }
 
